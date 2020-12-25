@@ -1,5 +1,4 @@
 version: "3"
-# MERN STACK DEV
 services:
   front_end:
     stdin_open: true
@@ -10,7 +9,6 @@ services:
       - "3000:3000"
     networks:
       - internal-network
-  # BACKEND DEPENDS ON THE DATABASE
   back_end:
     build:
       context: ./backend
@@ -21,7 +19,6 @@ services:
       - internal-network
     depends_on:
       - mongo
-  # PULL MONOGODB FROM THE LATEST IMAGE
   mongo:
     image: mongo
     ports:
@@ -30,7 +27,6 @@ services:
       - internal-network
     volumes:
       - mongo-data:/data/db
-  # MONGO EXPRESS FOR MONGO WEB INTERFACE
   mongo-web:
     image: mongo-express
     ports:
