@@ -1,42 +1,54 @@
-import React, { useReducer, useEffect } from "react";
+import React from "react";
 
-import Report from "./components/Report";
-import Landing from "./components/Landing";
-import Dashboard from "./components/Dashboard";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import Report from "./pages/Report";
+import Error404 from "./pages/Error404";
+import Loading from "./components/Loading";
+import Landing from "./pages/Landing";
+import Dashboard from "./pages/Dashboard";
 import LoginForm from "./components/LoginForm";
-import RegisterForm from "./components/RegisterForm";
 
-// import reducer from "./utils/mainReducer";
+import { useAuth } from "./utils/AuthContext";
+import ProtectedRoute from "./utils/ProtectedRoute";
 
-const reducer = (state, action) => {
-	return state;
-};
-
-const initialState = {
-	isAuth: false,
-	isLoading: true,
-	isError: false,
-};
-
-export const MainContext = React.createContext();
+import Navbar from "./components/Navbar";
+import ProtectedNavbar from "./components/ProtectedNavbar";
 
 const App = () => {
-	const [state, dispatch] = useReducer(reducer, initialState);
-
-	useEffect(() => {
-		dispatch();
-	}, []);
+	const { isLoading } = useAuth();
 
 	return (
-		<MainContext.Provider value={{ state }}>
-			<React.Fragment>
-				<Dashboard />
-				<Landing />
-				<LoginForm />
-				<RegisterForm />
-				<Report />
-			</React.Fragment>
-		</MainContext.Provider>
+		<Router>
+			<Switch>
+				<Route path="/" exact>
+					{isLoading ? (
+						<Loading />
+					) : (
+						<Navbar>
+							<Landing />
+						</Navbar>
+					)}
+				</Route>
+				<Route path="/login">
+					<LoginForm />
+				</Route>
+				<ProtectedRoute path="/dashboard">
+					<ProtectedNavbar>
+						<Dashboard />
+					</ProtectedNavbar>
+				</ProtectedRoute>
+				<ProtectedRoute path="/report">
+					<ProtectedNavbar>
+						<Report />
+					</ProtectedNavbar>
+				</ProtectedRoute>
+
+				<Route path="*">
+					<Error404 />
+				</Route>
+			</Switch>
+		</Router>
 	);
 };
 
