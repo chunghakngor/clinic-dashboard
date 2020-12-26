@@ -17,31 +17,31 @@ import { useAuth } from "./utils/AuthContext";
 import ProtectedRoute from "./utils/ProtectedRoute";
 
 const App = () => {
-	const { isLoading } = useAuth();
+  const { isLoading } = useAuth();
 
-	return (
-		<Router>
-			<Switch>
-				<Route path="/" exact>
-					{isLoading ? <Loading /> : <Landing />}
-				</Route>
+  return (
+    <Router>
+      <Switch>
+        <Route path="/" exact>
+          {isLoading ? <Loading /> : <Landing />}
+        </Route>
 
-				<Route path="/login">
-					<LoginForm />
-				</Route>
+        <Route path="/login">
+          <LoginForm />
+        </Route>
 
-				<ProtectedRoute path="/account" component={<Account />} />
-				<ProtectedRoute path="/search" component={<Search />} />
-				<ProtectedRoute path="/dashboard" component={<Dashboard />} />
-				<ProtectedRoute path="/report" component={<Report />} />
-				<ProtectedRoute path="/analytics" component={<Analytics />} />
+        <ProtectedRoute path="/account" component={<Account />} />
+        <ProtectedRoute path="/search" component={<Search />} />
+        <ProtectedRoute path="/dashboard" component={<Dashboard />} />
+        <ProtectedRoute path="/report" component={<Report />} />
+        <ProtectedRoute path="/analytics" component={<Analytics />} />
 
-				<Route path="*">
-					<Error404 />
-				</Route>
-			</Switch>
-		</Router>
-	);
+        <Route path="*">
+          <Error404 />
+        </Route>
+      </Switch>
+    </Router>
+  );
 };
 
 export default App;
