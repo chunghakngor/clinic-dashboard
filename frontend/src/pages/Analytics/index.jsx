@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const Analytics = () => {
-	return <div></div>;
+	useEffect(() => {
+		document.title = "React Clinic | Analytics";
+	}, []);
+
+	return (
+		<div>
+			<h2>Analytics</h2>
+		</div>
+	);
 };
 
 export default Analytics;

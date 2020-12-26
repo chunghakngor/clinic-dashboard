@@ -69,71 +69,86 @@ const ProtectedNavbar = ({ children }) => {
 						{drawerStatus ? <ChevronRightIcon /> : <ChevronLeftIcon />}
 					</IconButton>
 				</div>
-				<Divider />
-				<List>
-					<ListItem button key="Account">
-						<ListItemIcon>
-							<AccountCircleIcon />
-						</ListItemIcon>
-						<ListItemText primary="Account" />
-					</ListItem>
-				</List>
-				<Divider />
-				<List>
-					<ListItem button key="Search">
-						<ListItemIcon>
-							<SearchIcon />
-						</ListItemIcon>
-						<ListItemText primary="Search" />
-					</ListItem>
-
-					<Link to="/dashboard">
-						<ListItem button key="Dashboard">
-							<ListItemIcon>
-								<DashboardIcon />
-							</ListItemIcon>
-							<ListItemText primary="Dashboard" />
-						</ListItem>
-					</Link>
-
-					<Link to="/report">
-						<ListItem button key="Report">
-							<ListItemIcon>
-								<InfoIcon />
-							</ListItemIcon>
-							<ListItemText primary="Report" />
-						</ListItem>
-					</Link>
-
-					<ListItem button key="Analytics">
-						<ListItemIcon>
-							<AssessmentIcon />
-						</ListItemIcon>
-						<ListItemText primary="Analytics" />
-					</ListItem>
-				</List>
-				<Divider />
-				<List>
-					<ListItem button key="Setting">
-						<ListItemIcon>
-							<SettingsIcon />
-						</ListItemIcon>
-						<ListItemText primary="Setting" />
-					</ListItem>
-
-					<ListItem button key="Logout" onClick={handleLogOut}>
-						<ListItemIcon>
-							<ExitToAppIcon />
-						</ListItemIcon>
-						<ListItemText primary="Logout" />
-					</ListItem>
-				</List>
+				<DrawerList handleLogOut={handleLogOut} />
 			</Drawer>
 			<main className={classes.content}>
 				<div className={classes.toolbar} />
 				{children}
 			</main>
 		</div>
+	);
+};
+
+const DrawerList = ({ handleLogOut }) => {
+	return (
+		<React.Fragment>
+			<Divider />
+			<List>
+				<Link to="/account">
+					<ListItem button key="Account">
+						<ListItemIcon>
+							<AccountCircleIcon />
+						</ListItemIcon>
+						<ListItemText primary="Account" />
+					</ListItem>
+				</Link>
+			</List>
+			<Divider />
+			<List>
+				<Link to="/search">
+					<ListItem button key="Search">
+						<ListItemIcon>
+							<SearchIcon />
+						</ListItemIcon>
+						<ListItemText primary="Search" />
+					</ListItem>
+				</Link>
+
+				<Link to="/dashboard">
+					<ListItem button key="Dashboard">
+						<ListItemIcon>
+							<DashboardIcon />
+						</ListItemIcon>
+						<ListItemText primary="Dashboard" />
+					</ListItem>
+				</Link>
+
+				<Link to="/report">
+					<ListItem button key="Report">
+						<ListItemIcon>
+							<InfoIcon />
+						</ListItemIcon>
+						<ListItemText primary="Report" />
+					</ListItem>
+				</Link>
+
+				<Link to="/analytics">
+					<ListItem button key="Analytics">
+						<ListItemIcon>
+							<AssessmentIcon />
+						</ListItemIcon>
+						<ListItemText primary="Analytics" />
+					</ListItem>
+				</Link>
+			</List>
+
+			<Divider />
+			<List>
+				<ListItem button key="Setting">
+					<ListItemIcon>
+						<SettingsIcon />
+					</ListItemIcon>
+					<ListItemText primary="Setting" />
+				</ListItem>
+
+				<ListItem button key="Logout" onClick={handleLogOut}>
+					<ListItemIcon>
+						<ExitToAppIcon />
+					</ListItemIcon>
+					<ListItemText primary="Logout" />
+				</ListItem>
+			</List>
+		</React.Fragment>
 	);
 };
 

@@ -2,29 +2,26 @@ import React from "react";
 
 import { Grid, AppBar, Toolbar, Typography } from "@material-ui/core";
 import LocalHospitalIcon from "@material-ui/icons/LocalHospital";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+
 import { Link } from "react-router-dom";
 
-const index = ({ children }) => {
+import { useAuth } from "../../utils/AuthContext";
+
+const Navbar = ({ children }) => {
 	return (
 		<Grid container direction="column" justify="flex-start" alignItems="center">
 			<Grid item style={{ width: "100%" }}>
 				<AppBar position="static">
 					<Toolbar>
-						<Grid container direction="row" justify="space-between" alignItems="flex-start">
-							<Grid item>
+						<Grid container direction="row" justify="flex-start" alignItems="flex-start" spacing={2}>
+							<Grid item xs={10}>
 								<Typography variant="h6">
 									<LocalHospitalIcon />
-									<span> </span>
-									React Clinic
+									<span> React Clinic </span>
 								</Typography>
 							</Grid>
-							<Grid item>
-								<Link to="/login">
-									<Typography style={{ color: "white" }} variant="h6">
-										Login
-									</Typography>
-								</Link>
-							</Grid>
+							<AuthLogic />
 						</Grid>
 					</Toolbar>
 				</AppBar>
@@ -36,4 +33,59 @@ const index = ({ children }) => {
 	);
 };
 
-export default index;
+const AuthLogic = () => {
+	const { isAuth, setAuth } = useAuth();
+
+	const handleLogOut = (e) => {
+		e.preventDefault();
+		setAuth(false, {});
+	};
+
+	return (
+		<React.Fragment>
+			{!isAuth && <UnAuthorised />}
+			{isAuth && <Authorised handleLogOut={handleLogOut} />}
+		</React.Fragment>
+	);
+};
+
+const UnAuthorised = () => {
+	return (
+		<React.Fragment>
+			<Grid item xs={1}></Grid>
+			<Grid item xs={1}>
+				<Link to="/login">
+					<Typography style={{ color: "white" }} variant="h6">
+						Login
+					</Typography>
+				</Link>
+			</Grid>
+		</React.Fragment>
+	);
+};
+
+const Authorised = ({ handleLogOut }) => {
+	return (
+		<React.Fragment>
+			<Grid item>
+				<Link to="/dashboard">
+					<Typography style={{ color: "white" }} variant="h6">
+						Dashboard
+					</Typography>
+				</Link>
+			</Grid>
+			<Grid item>
+				<Link to="/account">
+					<Typography style={{ color: "white" }} variant="h6">
+						Account
+					</Typography>
+				</Link>
+			</Grid>
+			<Grid item>
+				<ExitToAppIcon style={{ color: "white" }} onClick={handleLogOut} />
+			</Grid>
+		</React.Fragment>
+	);
+};
+
+export default Navbar;

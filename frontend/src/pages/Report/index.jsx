@@ -7,7 +7,7 @@ const Report = () => {
 
 	return (
 		<div>
-			<h3>Report</h3>
+			<h2>Report</h2>
 		</div>
 	);
 };

@@ -2,8 +2,9 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
 import { useAuth } from "./AuthContext";
+import ProtectedNavbar from "../components/ProtectedNavbar";
 
-const ProtectedRoute = ({ children, ...rest }) => {
+const ProtectedRoute = ({ component, ...rest }) => {
 	const { isAuth } = useAuth();
 
 	return (
@@ -11,7 +12,7 @@ const ProtectedRoute = ({ children, ...rest }) => {
 			{...rest}
 			render={({ location }) =>
 				isAuth ? (
-					children
+					<ProtectedNavbar>{component}</ProtectedNavbar>
 				) : (
 					<Redirect
 						to={{

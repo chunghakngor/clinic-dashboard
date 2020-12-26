@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const Search = () => {
-	return <div></div>;
+	useEffect(() => {
+		document.title = "React Clinic | Search";
+	}, []);
+
+	return (
+		<div>
+			<h2>Search</h2>
+		</div>
+	);
 };
 
 export default Search;
