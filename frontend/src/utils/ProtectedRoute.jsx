@@ -5,25 +5,25 @@ import { useAuth } from "./AuthContext";
 import ProtectedNavbar from "../components/ProtectedNavbar";
 
 const ProtectedRoute = ({ component, ...rest }) => {
-	const { isAuth } = useAuth();
+  const { isAuth } = useAuth();
 
-	return (
-		<Route
-			{...rest}
-			render={({ location }) =>
-				isAuth ? (
-					<ProtectedNavbar>{component}</ProtectedNavbar>
-				) : (
-					<Redirect
-						to={{
-							pathname: "/login",
-							state: { from: location },
-						}}
-					/>
-				)
-			}
-		/>
-	);
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        isAuth ? (
+          <ProtectedNavbar>{component}</ProtectedNavbar>
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: location },
+            }}
+          />
+        )
+      }
+    />
+  );
 };
 
 export default ProtectedRoute;

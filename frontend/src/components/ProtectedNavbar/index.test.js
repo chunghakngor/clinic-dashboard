@@ -5,5 +5,5 @@ import { userEvent, fireEvent } from "@testing-library/user-event";
 import Component from "./index";
 
 test("test description", () => {
-	render(<Component />);
+  render(<Component />);
 });
