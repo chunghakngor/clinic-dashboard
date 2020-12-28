@@ -29,7 +29,7 @@ Manually
    - `cd backend`
    - Edit the `.env` file using the `template.env`
    - `npm run start`
-   - Test API Connection by GET Request to `http://localhost:4000`
+   - Test API Connection by GET Request to [http://localhost:4000]("http://localhost:4000")
 3. Front-end (React)
     - `cd frontend`
     - `npm run start`

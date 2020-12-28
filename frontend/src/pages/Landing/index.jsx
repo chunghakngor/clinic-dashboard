@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 
-import { Grid, Container, Typography, Paper, Button } from "@material-ui/core";
+import { Grid, Container, Typography, Paper, Button, makeStyles } from "@material-ui/core";
 
 import Navbar from "../../components/Navbar";
+
+const useStyles = makeStyles({});
 
 const Landing = () => {
   useEffect(() => {
@@ -13,7 +15,8 @@ const Landing = () => {
     <Navbar>
       <Container maxWidth="lg">
         <Paper elevation={2} style={{ width: "100%", padding: "2em" }}>
-          <Grid container direction="row" justify="space-between" alignItems="center">
+          <Grid container justify="space-between" alignItems="center">
+            {/* replace all of the below with proper text */}
             <Grid item>
               <Typography variant="h3"> Lorem, ipsum. </Typography>
             </Grid>
@@ -41,7 +44,7 @@ const Landing = () => {
                 </Typography>
               </Grid>
               <Grid item>
-                <Grid container direction="row" justify="center" alignItems="center">
+                <Grid container justify="center" alignItems="center">
                   <Grid item>
                     <Button variant="contained" color="primary" style={{ margin: "1em" }}>
                       Learn More

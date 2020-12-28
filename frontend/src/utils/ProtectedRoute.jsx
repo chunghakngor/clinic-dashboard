@@ -1,10 +1,12 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
+import Helmet from "react-helmet";
+
 import { useAuth } from "./AuthContext";
 import ProtectedNavbar from "../components/ProtectedNavbar";
 
-const ProtectedRoute = ({ component, ...rest }) => {
+const ProtectedRoute = ({ component, title, ...rest }) => {
   const { isAuth } = useAuth();
 
   return (
@@ -12,7 +14,10 @@ const ProtectedRoute = ({ component, ...rest }) => {
       {...rest}
       render={({ location }) =>
         isAuth ? (
-          <ProtectedNavbar>{component}</ProtectedNavbar>
+          <React.Fragment>
+            <Helmet title={`React Clinic | ${title}`} />
+            <ProtectedNavbar>{component}</ProtectedNavbar>
+          </React.Fragment>
         ) : (
           <Redirect
             to={{
