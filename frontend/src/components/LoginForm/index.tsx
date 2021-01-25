@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-
+import { RootState } from "../../redux/reducers";
+import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { Grid, Button, Paper, Container, Input, InputAdornment, Avatar, Typography, makeStyles } from "@material-ui/core";
@@ -7,8 +8,7 @@ import { AccountCircle, Lock } from "@material-ui/icons";
 import Alert from "@material-ui/lab/Alert";
 import AlertTitle from "@material-ui/lab/AlertTitle";
 
-import { RootState } from "../../redux/reducers";
-import { useSelector, useDispatch } from "react-redux";
+
 
 const useStyles = makeStyles({
   container: {
@@ -40,7 +40,6 @@ const useStyles = makeStyles({
 });
 
 const LoginForm = () => {
-  // const { username, password, isLoading, isError, message } = state;
   const { username, password, isLoading, isError, message } = useSelector((state: RootState) => state.loginReducer);
   const { isAuth } = useSelector((state: RootState) => state.authReducer);
   const dispatch = useDispatch();
@@ -51,7 +50,7 @@ const LoginForm = () => {
     document.title = "React Clinic | Login";
   }, []);
 
-  const handleSubmit = (event: Event) => {
+  const handleSubmit = (event: Event): void => {
     event.preventDefault();
     dispatch({ type: "LOADING" });
     fetch("http://localhost:4000/auth/login", {
