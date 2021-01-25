@@ -28,7 +28,6 @@ const loginReducer = (state: LoginStateInterface = initState, action: any): obje
         isLoading: false,
         isError: false,
         isSuccess: true,
-        message: action.payload,
       };
     // TOGGLE FOR LOADING
     case "LOGIN/LOADING":
@@ -52,7 +51,7 @@ const loginReducer = (state: LoginStateInterface = initState, action: any): obje
         [action.target]: action.value,
       };
     default:
-      return { ...state };
+      return initState;
   }
 };
 

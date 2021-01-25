@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { Grid, Container, Typography, Paper, Button, makeStyles } from "@material-ui/core";
 import { Helmet } from "react-helmet";
-import Navbar from "../../components/Navbar";
-
-const useStyles = makeStyles({});
+import Navbar from "../components/Navbar";
 
 const Landing = () => {
   return (
@@ -21,7 +19,7 @@ const Landing = () => {
                 <Typography variant="h3"> Lorem, ipsum. </Typography>
               </Grid>
               <Grid item>
-                <Typography varient="h5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores, quas.</Typography>
+                <Typography variant="h5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores, quas.</Typography>
               </Grid>
 
               <Grid item container direction="column" style={{ padding: "5em 0em" }}>
@@ -30,13 +28,13 @@ const Landing = () => {
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad pariatur harum temporibus debitis eius quo magni
                     distinctio, impedit odit illo?
                   </Typography>
-                  <Typography align="center" varient="body1" gutterBottom>
+                  <Typography align="center" variant="body1" gutterBottom>
                     Lorem, ipsum dolor sit amet adipisicing elit. Quisquam voluptatem itaque maiores voluptate ducimus unde
                     laudantium ipsum, libero magnam sunt.
                   </Typography>
                 </Grid>
                 <Grid item>
-                  <Typography align="center" varient="body2" gutterBottom>
+                  <Typography align="center" variant="body2" gutterBottom>
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis dolorem ad expedita blanditiis quisquam
                     minus repudiandae harum nesciunt consequuntur at laboriosam excepturi pariatur officia alias natus libero
                     maxime, sapiente et earum. Id accusamus nesciunt pariatur atque in qui enim ducimus velit, esse, quam

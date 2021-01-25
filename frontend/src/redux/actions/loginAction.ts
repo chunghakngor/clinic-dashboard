@@ -1,7 +1,6 @@
-export const LOGIN_SUCCESS = (payload: string) => {
+export const LOGIN_SUCCESS = () => {
   return {
     type: "LOGIN/SUCCESS",
-    payload,
   };
 };
 
