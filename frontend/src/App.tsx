@@ -15,11 +15,12 @@ import Helmet from "react-helmet";
 
 import LoginForm from "./components/LoginForm";
 
-import { useAuth } from "./utils/AuthContext";
+import { useSelector } from "react-redux";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import { RootState } from "./redux/reducers";
 
 const App = () => {
-  const { isLoading } = useAuth();
+  const { isLoading } = useSelector((state: RootState) => state.authReducer);
 
   return (
     <Router>

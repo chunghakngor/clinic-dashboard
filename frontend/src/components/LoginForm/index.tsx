@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { Redirect } from "react-router-dom";
 
@@ -7,10 +7,8 @@ import { AccountCircle, Lock } from "@material-ui/icons";
 import Alert from "@material-ui/lab/Alert";
 import AlertTitle from "@material-ui/lab/AlertTitle";
 
-import reducer from "./loginReducer";
-import initState from "./initState";
-
-import { useAuth } from "../../utils/AuthContext";
+import { RootState } from "../../redux/reducers";
+import { useSelector, useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
   container: {
@@ -42,17 +40,19 @@ const useStyles = makeStyles({
 });
 
 const LoginForm = () => {
+  // const { username, password, isLoading, isError, message } = state;
+  const { username, password, isLoading, isError, message } = useSelector((state: RootState) => state.loginReducer);
+  const { isAuth } = useSelector((state: RootState) => state.authReducer);
+  const dispatch = useDispatch();
+
   const styles = useStyles();
-  const [state, dispatch] = useReducer(reducer, initState);
-  const { username, password, isLoading, isError, message } = state;
-  const { isAuth, setAuth } = useAuth();
 
   useEffect(() => {
     document.title = "React Clinic | Login";
   }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event: Event) => {
+    event.preventDefault();
     dispatch({ type: "LOADING" });
     fetch("http://localhost:4000/auth/login", {
       method: "POST",
@@ -64,14 +64,14 @@ const LoginForm = () => {
       .then((data) => {
         if (data.success) {
           document.cookie = `access_token=${data.token}`;
-          dispatch({ type: "SUCESS", value: data.message });
-          setAuth(true, { username: data.username, userID: data.userID });
+          dispatch({ type: "LOGIN/SUCESS", payload: data.message });
+          dispatch({ type: "AUTH/LOGIN", payload: { username: data.username, userID: data.userID } });
         } else {
-          dispatch({ type: "ERROR", value: data.message });
+          dispatch({ type: "LOGIN/ERROR", payload: data.message });
         }
       })
       .catch((err) => {
-        dispatch({ type: "ERROR", value: "Something has gone wrong!" });
+        dispatch({ type: "LOGIN/ERROR", payload: "Something has gone wrong!" });
       });
   };
 
@@ -111,7 +111,7 @@ const LoginForm = () => {
                       required
                       placeholder="Username"
                       value={username}
-                      onChange={(e) => dispatch({ type: "SET", target: "username", value: e.target.value })}
+                      onChange={(e) => dispatch({ type: "LOGIN/SET", target: "username", value: e.target.value })}
                       className={styles.inputPadding}
                       startAdornment={
                         <InputAdornment position="start">
@@ -127,7 +127,7 @@ const LoginForm = () => {
                       placeholder="Password"
                       type="password"
                       value={password}
-                      onChange={(e) => dispatch({ type: "SET", target: "password", value: e.target.value })}
+                      onChange={(e) => dispatch({ type: "LOGIN/SET", target: "password", value: e.target.value })}
                       className={styles.inputPadding}
                       startAdornment={
                         <InputAdornment position="start">
@@ -137,7 +137,7 @@ const LoginForm = () => {
                     />
                   </Grid>
                   {/* Login/Back */}
-                  <Grid container item direction="row" justify="space-evenly" className={styles.formPadding}>
+                  <Grid container item justify="space-evenly" alignItems="center" style={{ paddingBottom: "2em" }}>
                     <Grid item>
                       <Button
                         variant="contained"

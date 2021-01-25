@@ -1,7 +1,25 @@
-const reducer = (state, action) => {
+const initState = {
+  username: "",
+  password: "",
+  message: "",
+  isSuccess: false,
+  isLoading: false,
+  isError: false,
+};
+
+interface LoginStateInterface {
+  username: string;
+  password: string;
+  message: string;
+  isSuccess: boolean;
+  isLoading: boolean;
+  isError: boolean;
+}
+
+const loginReducer = (state: LoginStateInterface = initState, action: any): object => {
   switch (action.type) {
     // SUCCESSFUL LOGIN
-    case "SUCESS":
+    case "LOGIN/SUCESS":
       return {
         ...state,
         username: "",
@@ -10,25 +28,25 @@ const reducer = (state, action) => {
         isLoading: false,
         isError: false,
         isSuccess: true,
-        message: action.value,
+        message: action.payload,
       };
     // TOGGLE FOR LOADING
-    case "LOADING":
+    case "LOGIN/LOADING":
       return {
         ...state,
         isLoading: !state.isLoading,
       };
     // WHEN ERROR OCCURS DURING SUBMIT
-    case "ERROR":
+    case "LOGIN/ERROR":
       return {
         ...state,
         isError: true,
         isLoading: false,
         password: "",
-        message: action.value,
+        message: action.payload,
       };
     // SETTING THE VALUE OF FORM DATA
-    case "SET":
+    case "LOGIN/SET":
       return {
         ...state,
         [action.target]: action.value,
@@ -38,4 +56,4 @@ const reducer = (state, action) => {
   }
 };
 
-export default reducer;
+export default loginReducer;

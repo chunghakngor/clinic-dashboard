@@ -7,7 +7,8 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 import { Link } from "react-router-dom";
 
-import { useAuth } from "../../utils/AuthContext";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/reducers";
 
 const useStyles = makeStyles({
   fullWidth: {
@@ -50,11 +51,12 @@ const Navbar = ({ children }) => {
 };
 
 const AuthLogic = () => {
-  const { isAuth, setAuth } = useAuth();
+  const { isAuth } = useSelector((state: RootState) => state.authReducer);
+  const dispatch = useDispatch();
 
-  const handleLogOut = (e) => {
-    e.preventDefault();
-    setAuth(false, {});
+  const handleLogOut = (event: Event) => {
+    event.preventDefault();
+    dispatch({ type: "AUTH/LOGOUT" });
   };
 
   return <React.Fragment>{isAuth ? <Authorised handleLogOut={handleLogOut} /> : <UnAuthorised />}</React.Fragment>;

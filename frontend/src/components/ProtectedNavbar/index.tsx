@@ -25,18 +25,19 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 import { Link } from "react-router-dom";
-import { useAuth } from "../../utils/AuthContext";
 
 import useStyles from "./useStyle";
+import { useDispatch } from "react-redux";
 
 const ProtectedNavbar = ({ children }) => {
   const classes = useStyles();
-  const { setAuth } = useAuth();
-  const [drawerStatus, setDrawer] = useState(false);
 
-  const handleLogOut = (e) => {
+  const [drawerStatus, setDrawer] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleLogOut = (e: Event) => {
     e.preventDefault();
-    setAuth(false, {});
+    dispatch({ type: "AUTH/LOGOUT" });
   };
 
   return (

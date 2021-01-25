@@ -2,10 +2,14 @@ import React from "react";
 
 import { Container, Grid, Button, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Error404 = () => {
   return (
     <Container fluid>
+      <Helmet>
+        <title>React Clinic | Error 404</title>
+      </Helmet>
       <Grid container direction="column" justify="center" alignItems="center" spacing={6}>
         <Grid item style={{ marginTop: "30%" }}>
           <Typography variant="h1" component="h2" align="center" gutterBottom>
