@@ -1,5 +1,14 @@
 # Clinic App Back End (Express)
 
+### To Do
+- [ ] Typescript conversion
+- [ ] Typechecking and interface creation for TS
+- [ ] Updates AUTH routes
+- [ ] Update PATIENT routes
+- [ ] Add Revenue routes for Chart in Front-End
+- [ ] Add Seeding file for MongoDB
+- [ ] Update Middlewear code
+
 ### Usuage
 
 To run locally:
