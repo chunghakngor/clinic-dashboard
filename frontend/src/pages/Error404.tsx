@@ -17,7 +17,7 @@ const Error404 = () => {
           </Typography>
         </Grid>
         <Grid item>
-          <Typography varient="body2" align="center">
+          <Typography variant="body2" align="center">
             Looks like you've made a wrong turn
           </Typography>
         </Grid>
