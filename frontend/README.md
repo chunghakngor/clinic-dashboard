@@ -1,5 +1,21 @@
 # Clinic App Front End (React)
 
+### To Do
+- [ ] Remove in-line styling
+- [ ] Add SASS back into Components
+- [ ] Update styling
+- [ ] Fix Chart components
+- [ ] Fix Card components
+- [ ] Dashboard styling updates
+- [ ] Error styling updates
+- [ ] Login styling update
+- [ ] Account page
+- [ ] Analytics page
+- [ ] Search page
+- [ ] Report page
+- [ ] Test Dockerfile again since TS Conversion
+- [ ] Middlewear to check if already Authorised (Check JWT/Cookie)
+
 ### Usuage
 
 To run locally:
