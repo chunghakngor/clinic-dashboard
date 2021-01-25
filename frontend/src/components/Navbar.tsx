@@ -8,7 +8,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/reducers";
+import { RootState } from "../redux/reducers";
 
 const useStyles = makeStyles({
   fullWidth: {
@@ -23,7 +23,11 @@ const useStyles = makeStyles({
   },
 });
 
-const Navbar = ({ children }) => {
+interface NavBarInterface {
+  children: JSX.Element;
+}
+
+const Navbar = ({ children }: NavBarInterface) => {
   const styles = useStyles();
 
   return (
@@ -51,7 +55,7 @@ const Navbar = ({ children }) => {
 };
 
 const AuthLogic = () => {
-  const { isAuth } = useSelector((state: RootState) => state.authReducer);
+  const { isAuth } = useSelector((state: RootState): any => state.authReducer);
   const dispatch = useDispatch();
 
   const handleLogOut = (event: Event) => {
@@ -79,7 +83,7 @@ const UnAuthorised = () => {
   );
 };
 
-const Authorised = ({ handleLogOut }) => {
+const Authorised = ({ handleLogOut }: any) => {
   const styles = useStyles();
 
   return (

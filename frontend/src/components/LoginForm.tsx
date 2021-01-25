@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
-
+import { RootState } from "../redux/reducers";
+import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { Grid, Button, Paper, Container, Input, InputAdornment, Avatar, Typography, makeStyles } from "@material-ui/core";
 import { AccountCircle, Lock } from "@material-ui/icons";
 import Alert from "@material-ui/lab/Alert";
 import AlertTitle from "@material-ui/lab/AlertTitle";
-
-import { RootState } from "../../redux/reducers";
-import { useSelector, useDispatch } from "react-redux";
+import { LOGIN_SUCCESS, LOGIN_ERROR } from "../redux/actions/loginAction";
+import { AUTH_LOGIN } from "../redux/actions";
 
 const useStyles = makeStyles({
   container: {
@@ -40,9 +40,8 @@ const useStyles = makeStyles({
 });
 
 const LoginForm = () => {
-  // const { username, password, isLoading, isError, message } = state;
-  const { username, password, isLoading, isError, message } = useSelector((state: RootState) => state.loginReducer);
-  const { isAuth } = useSelector((state: RootState) => state.authReducer);
+  const { username, password, isLoading, isError, message } = useSelector((state: RootState): any => state.loginReducer);
+  const { isAuth } = useSelector((state: RootState): any => state.authReducer);
   const dispatch = useDispatch();
 
   const styles = useStyles();
@@ -51,8 +50,18 @@ const LoginForm = () => {
     document.title = "React Clinic | Login";
   }, []);
 
-  const handleSubmit = (event: Event) => {
-    event.preventDefault();
+  const handleAuth = (data: any): void => {
+    if (data.success) {
+      document.cookie = `access_token=${data.token}`;
+      dispatch(LOGIN_SUCCESS());
+      dispatch(AUTH_LOGIN({ username: data.username, userID: data.userID }));
+    } else {
+      dispatch(LOGIN_ERROR("Invalid login! Please check your username and password."));
+    }
+  };
+
+  const handleSubmit = (e: any): void => {
+    e.preventDefault();
     dispatch({ type: "LOADING" });
     fetch("http://localhost:4000/auth/login", {
       method: "POST",
@@ -62,16 +71,10 @@ const LoginForm = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.success) {
-          document.cookie = `access_token=${data.token}`;
-          dispatch({ type: "LOGIN/SUCESS", payload: data.message });
-          dispatch({ type: "AUTH/LOGIN", payload: { username: data.username, userID: data.userID } });
-        } else {
-          dispatch({ type: "LOGIN/ERROR", payload: data.message });
-        }
+        handleAuth(data);
       })
       .catch((err) => {
-        dispatch({ type: "LOGIN/ERROR", payload: "Something has gone wrong!" });
+        dispatch(LOGIN_ERROR("Something has gone wrong! Please try again."));
       });
   };
 

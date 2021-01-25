@@ -1,5 +1,6 @@
+import React from "react";
 import { Box, Grid, Typography, Card, CardContent } from "@material-ui/core";
-import { ChartWrapper, PatientChart, RecoveredChart, RevenueChart } from "./chart";
+import { ChartWrapper, PatientChart, RecoveredChart, RevenueChart } from "../components/Chart";
 import { Helmet } from "react-helmet";
 
 const Dashboard = () => {
@@ -39,7 +40,12 @@ const SecondRow = () => {
   );
 };
 
-const DashboardCard = ({ heading, body }) => {
+interface DashboardCardInterface {
+  heading: string;
+  body: string;
+}
+
+const DashboardCard = ({ heading, body }: DashboardCardInterface) => {
   return (
     <Grid item xs={6} md={4} lg={2}>
       <Box textAlign="center">

@@ -1,26 +1,17 @@
 import React from "react";
-
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
-import Report from "./pages/Report";
-import Search from "./pages/Search";
-import Account from "./pages/Account";
-import Loading from "./components/Loading";
-import Landing from "./pages/Landing";
-import Error404 from "./pages/Error404";
-import Dashboard from "./pages/Dashboard";
-import Analytics from "./pages/Analytics";
-
 import Helmet from "react-helmet";
-
-import LoginForm from "./components/LoginForm";
-
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
-import ProtectedRoute from "./utils/ProtectedRoute";
 import { RootState } from "./redux/reducers";
 
+import { Report, Search, Account, Landing, Error404, Dashboard, Analytics } from "./pages";
+
+import LoginForm from "./components/LoginForm";
+import Loading from "./components/Loading";
+import ProtectedRoute from "./utils/ProtectedRoute";
+
 const App = () => {
-  const { isLoading } = useSelector((state: RootState) => state.authReducer);
+  const { isLoading } = useSelector((state: RootState): any => state.authReducer);
 
   return (
     <Router>

@@ -8,7 +8,8 @@ import { Provider } from "react-redux";
 
 import { rootReducer } from "./redux/reducers";
 
-const globalStore = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const composeEnhancers = window && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+const globalStore = createStore(rootReducer, composeEnhancers);
 
 ReactDOM.render(
   <React.StrictMode>

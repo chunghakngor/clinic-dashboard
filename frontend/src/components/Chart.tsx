@@ -1,8 +1,13 @@
-import { SingleLineChart, MultiLineChart } from "../../components/LineChart";
+import React from "react";
+import { SingleLineChart, MultiLineChart } from "./LineCharts";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
-export const ChartWrapper = ({ chart }) => {
+interface ChartWrapperInterface {
+  chart: JSX.Element;
+}
+
+export const ChartWrapper = ({ chart }: ChartWrapperInterface) => {
   return (
     <Grid item sm={12} lg={4}>
       <Paper elevation={1} style={{ padding: "20px" }}>
