@@ -6,9 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 var SERVER_HOSTNAME = process.env.SERVER_HOSTNAME || "localhost";
-var SERVER_PORT = 4000;
-var MONGODB_CONNECTION = process.env.MONGODB_CONNECTION;
-var SECRET = process.env.SECRET;
+var SERVER_PORT = Number(String(process.env.SERVER_PORT)) || 4000;
+var MONGODB_CONNECTION = process.env.MONGODB_CONNECTION || "mongodb://localhost:27017/clinic";
+var SECRET = process.env.SECRET || "i5hQ62qn7#6UcaioO*bU%^";
 exports.default = {
     server: {
         hostname: SERVER_HOSTNAME,
@@ -17,7 +17,7 @@ exports.default = {
     db: {
         url: MONGODB_CONNECTION,
     },
-    bcrpt: {
+    bcrypt: {
         secret: SECRET,
     },
 };

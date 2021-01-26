@@ -6,22 +6,22 @@ interface Contact {
   comments: string;
 }
 
-interface PatientInterface extends Document {
+export interface PatientInterface extends Document {
   firstname: string;
   lastname: string;
   commission_rate?: number;
   price_quote: number;
   first_contact?: any;
   comments?: string[];
-  consult_date: Date;
-  deposit: string;
-  ht: Date;
-  graft: number;
-  follow_up_2w: Date;
-  follow_up_3m: Date;
-  follow_up_6m: Date;
-  follow_up_1y: Date;
-  contact_method: Contact[];
+  consult_date?: Date;
+  deposit: number;
+  ht?: Date;
+  graft?: number;
+  follow_up_2w?: Date;
+  follow_up_3m?: Date;
+  follow_up_6m?: Date;
+  follow_up_1y?: Date;
+  contact_method?: Contact[];
   created?: Date;
 }
 

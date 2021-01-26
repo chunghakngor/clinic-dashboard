@@ -9,7 +9,7 @@ var config_1 = __importDefault(require("../config/config"));
 var logger_1 = __importDefault(require("../config/logger"));
 var NAMESPACE = "Middlewear";
 var verifyJWT = function (req, res, next) {
-    jsonwebtoken_1.default.verify(req.cookies.access_token, "" + config_1.default.bcrpt.secret, function (err, decoded) {
+    jsonwebtoken_1.default.verify(req.cookies.access_token, "" + config_1.default.bcrypt.secret, function (err, decoded) {
         if (decoded != undefined) {
             next();
         }

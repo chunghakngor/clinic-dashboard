@@ -27,4 +27,4 @@ var ERROR = function (namespace, message, object) {
         console.error("[" + getTimeStamp() + "] [ERROR] [" + namespace + "] " + message);
     }
 };
-exports.default = { INFO: INFO, WARN: WARN, ERROR: ERROR };
+exports.default = { INFO: INFO, WARN: WARN, ERROR: ERROR, getTimeStamp: getTimeStamp };

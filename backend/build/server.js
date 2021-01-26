@@ -4,13 +4,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
+var mongoose_1 = __importDefault(require("mongoose"));
 var body_parser_1 = __importDefault(require("body-parser"));
 var cookie_parser_1 = __importDefault(require("cookie-parser"));
 var config_1 = __importDefault(require("./config/config"));
 var logger_1 = __importDefault(require("./config/logger"));
 var auth_1 = __importDefault(require("./routes/auth"));
+var patient_1 = __importDefault(require("./routes/patient"));
 var app = express_1.default();
 var NAMESPACE = "Server";
+mongoose_1.default.connect(config_1.default.db.url, { useUnifiedTopology: true, useNewUrlParser: true });
 // LOGGING
 app.use(function (req, res, next) {
     logger_1.default.INFO(NAMESPACE, "METHOD: [" + req.method + "] - URL: [" + req.url + "] - IP: [" + req.socket.remoteAddress + "]");
@@ -33,14 +36,12 @@ app.use(function (req, res, next) {
     next();
 });
 app.use("/auth", auth_1.default);
-// app.use("/patient", patientRoutes);
+app.use("/patient", patient_1.default);
 app.get("/", function (req, res) {
-    res.status(200).json({
-        status: "active",
-    });
+    res.status(200).json({ status: "active" });
 });
 // replaced app.get(*, (req, res))
-app.use(function (req, res, next) {
+app.use(function (req, res) {
     var error = new Error("Not found");
     res.status(404).json({
         message: error.message,
